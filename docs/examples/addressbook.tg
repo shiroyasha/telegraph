@@ -1,27 +1,5 @@
 version 0.23.17
 
-
-// errors
-
-error PersonNotFound {
-  String message
-}
-
-error NameNotUnique {
-  String message;
-}
-
-error NameTooLong {
-  String message;
-}
-
-error PersonNotFound {
-  String message;
-}
-
-
-// structures
-
 enum PhoneType { MOBILE, HOME, WORK }
 
 struct Phone {
@@ -44,21 +22,18 @@ struct Person {
   Address address;
 }
 
+event person_added         publishes Person;
+event person_removed       publishes Person;
+event person_got_a_message publishes { Person person; String message; }
 
-// events
+error PersonNotFound { String message; }
+error NameNotUnique  { String message; }
+error NameTooLong    { String message; }
+error PersonNotFound { String message; }
 
-event person_added   publishes Person;
-event person_removed publishes Person;
 
-event person_got_a_message publishes {
-  Person person;
-  String message;
-}
+function add_person(String name, Phone phone, Address address) returns Person throws NameNotUnique, NameTooLong;
 
-// functions
+function remote_person(Integer person_id) throws PersonNotFound;
 
-Person add_person(String name, Phone phone, Address address) throws NameNotUnique, NameTooLong;
-
-void remote_person(Integer person_id) throws PersonNotFound;
-
-void send_sms(Integer person_id, String message) throws PersonNotFound;
+function send_sms(Integer person_id, String message) throws PersonNotFound;
