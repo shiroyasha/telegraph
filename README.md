@@ -109,7 +109,7 @@ error DivisionByZero {
   String message;
 }
 
-function divive(Integer a, Integer b) returns Float throws DivisionByZero;
+Float divive(Float a, Float b) throws DivisionByZero;
 ```
 
 ## Examples
