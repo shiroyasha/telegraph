@@ -1,5 +1,8 @@
 # Telegraph - The RPC protocol that doesn't suck
 
+## Examples
+
+- [Address Book](docs/examples/addressbook.tg)
 
 ## LICENSE
 

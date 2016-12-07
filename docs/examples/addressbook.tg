@@ -1,0 +1,64 @@
+version 0.23.17
+
+
+// errors
+
+error PersonNotFound {
+  String message
+}
+
+error NameNotUnique {
+  String message;
+}
+
+error NameTooLong {
+  String message;
+}
+
+error PersonNotFound {
+  String message;
+}
+
+
+// structures
+
+enum PhoneType { MOBILE, HOME, WORK }
+
+struct Phone {
+  PhoneType type;
+  String number;
+}
+
+struct Address {
+  String street;
+  String number;
+  String city;
+  String postcode;
+  String county;
+}
+
+struct Person {
+  Integer id;
+  String name;
+  Phone phone;
+  Address address;
+}
+
+
+// events
+
+event person_added   publishes Person;
+event person_removed publishes Person;
+
+event person_got_a_message publishes {
+  Person person;
+  String message;
+}
+
+// functions
+
+Person add_person(String name, Phone phone, Address address) throws NameNotUnique, NameTooLong;
+
+void remote_person(Integer person_id) throws PersonNotFound;
+
+void send_sms(Integer person_id, String message) throws PersonNotFound;
