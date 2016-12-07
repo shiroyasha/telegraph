@@ -42,7 +42,6 @@ void publish_message(Integer user_id, String message);
 | String     | Variable sized character array                         |
 | UUID       | UUID as defined by RFC 4122, ISO/IEC 9834-8:2005       |
 | JSON       | Javascript object notation type                        |
-| XML        | XML type                                               |
 | Date       | Date value                                             |
 | Time       | Time value                                             |
 | DateTime   | Date and Time value                                    |
