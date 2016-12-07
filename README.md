@@ -14,7 +14,11 @@ struct User {
 }
 
 event user_created publishes User;
-event message_published publishes Message;
+
+event message_published publishes {
+  User publisher;
+  String message;
+}
 
 error UsenameAlreadyTaken {
   String error_description;
