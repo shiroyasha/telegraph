@@ -1,0 +1,13 @@
+version 1.0.2
+
+error DivisionByZero {
+  String message;
+}
+
+Double add(Double a, Double b);
+Double subsctract(Double a, Double b);
+Double multilpy(Double a, Double b);
+Double divide(Double a, Double b) throws DivisionByZero;
+
+Double sum([Double] numbers);
+Double product([Double] numbers);
