@@ -27,21 +27,21 @@ void publish_message(Integer user_id, String message);
 
 ## Types
 
-Type       | Description
-------------------------
-SmallInt   | 4 bytes integer
-Integer    | 4 bytes integer
-BigInt     | 8 bytes integer
-Float      | 4 bytes floating point number
-Double     | 8 bytes floating point number
-Boolean    | True of False valued type
-String     | Variable sized character array
-UUID       | Universally Unique Identifiers (UUID) as defined by RFC 4122, ISO/IEC 9834-8:2005
-JSON       | Javascript object notation type
-XML        | XML type
-Date       | Date value
-Time       | Time value
-DateTime   | Date and Time value
+| Type       | Description                                            |
+| -----------|--------------------------------------------------------|
+| SmallInt   | 4 bytes integer                                        |
+| Integer    | 4 bytes integer                                        |
+| BigInt     | 8 bytes integer                                        |
+| Float      | 4 bytes floating point number                          |
+| Double     | 8 bytes floating point number                          |
+| Boolean    | True of False valued type                              |
+| String     | Variable sized character array                         |
+| UUID       | UUID as defined by RFC 4122, ISO/IEC 9834-8:2005       |
+| JSON       | Javascript object notation type                        |
+| XML        | XML type                                               |
+| Date       | Date value                                             |
+| Time       | Time value                                             |
+| DateTime   | Date and Time value                                    |
 
 Arrays are represented with angle brackets. For example, an array of integers:
 
