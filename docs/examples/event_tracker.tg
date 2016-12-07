@@ -1,0 +1,15 @@
+version 0.0.1
+
+error InvalidCriteria {
+  String message;
+}
+
+struct Event {
+  String event_name;
+  JSON fields;
+}
+
+event event_arrived publishes Event;
+
+[Event] search(Json criteria) throws InvalidCriteria;
+Integer count(Json criteria) throws InvalidCriteria;
