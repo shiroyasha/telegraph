@@ -1,5 +1,7 @@
 # Telegraph - The service definition protocol
 
+[![Build Status](https://semaphoreci.com/api/v1/renderedtext/telegraph/branches/master/badge.svg)](https://semaphoreci.com/renderedtext/telegraph)
+
 Telegraph is a tool for defining public APIs for your services.
 
 Based on the public API, telegraph can generate clients and servers for your
