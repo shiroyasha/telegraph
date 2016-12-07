@@ -498,8 +498,9 @@ char *yytext;
 #line 2 "src/lexer.l"
 
 #include <iostream>
+#include "token_types.hpp"
 
-#line 503 "src/lexer.yy.c"
+#line 504 "src/lexer.yy.c"
 
 #define INITIAL 0
 
@@ -686,10 +687,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 12 "src/lexer.l"
+#line 13 "src/lexer.l"
 
 
-#line 693 "src/lexer.yy.c"
+#line 694 "src/lexer.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -774,96 +775,96 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "src/lexer.l"
-{ std::cout << "left parenthesis: " << yytext << std::endl; }
+#line 15 "src/lexer.l"
+{ std::cout << "left parenthesis: " << yytext << std::endl; return LEFT_PARENTHESIS; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "src/lexer.l"
-{ std::cout << "right parenthesis: " << yytext << std::endl; }
+#line 16 "src/lexer.l"
+{ std::cout << "right parenthesis: " << yytext << std::endl; return RIGHT_PARENTHESIS;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 17 "src/lexer.l"
-{ std::cout << "left brace: " << yytext << std::endl; }
+{ std::cout << "left brace: " << yytext << std::endl; return LEFT_BRACE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 18 "src/lexer.l"
-{ std::cout << "right brace: " << yytext << std::endl; }
+{ std::cout << "right brace: " << yytext << std::endl; return RIGHT_BRACE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 19 "src/lexer.l"
-{ std::cout << "semicolon : " << yytext << std::endl; }
+#line 20 "src/lexer.l"
+{ std::cout << "semicolon : " << yytext << std::endl; return SEMICOLON; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 22 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_VERSION; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 23 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_STRUCT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 24 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_ENUM; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 25 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_ERROR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 26 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_ERROR; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "src/lexer.l"
-{ std::cout << "keyword: " << yytext << std::endl; }
+#line 27 "src/lexer.l"
+{ std::cout << "keyword: " << yytext << std::endl; return KW_THROWS; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "src/lexer.l"
-{ std::cout << "version number: " << yytext << std::endl; }
+#line 29 "src/lexer.l"
+{ std::cout << "version number: " << yytext << std::endl; return VERSION_NUMBER; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 30 "src/lexer.l"
-{ std::cout << "variable: " << yytext << std::endl; }
+#line 31 "src/lexer.l"
+{ std::cout << "variable: " << yytext << std::endl; return VARIABLE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 31 "src/lexer.l"
-{ std::cout << "constant: " << yytext << std::endl; }
+#line 32 "src/lexer.l"
+{ std::cout << "constant: " << yytext << std::endl; return CONSTANT; }
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 33 "src/lexer.l"
+#line 34 "src/lexer.l"
 ;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 34 "src/lexer.l"
+#line 35 "src/lexer.l"
 ;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 35 "src/lexer.l"
+#line 36 "src/lexer.l"
 ;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 37 "src/lexer.l"
+#line 38 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 867 "src/lexer.yy.c"
+#line 868 "src/lexer.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1861,7 +1862,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "src/lexer.l"
+#line 38 "src/lexer.l"
 
 
 
