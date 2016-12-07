@@ -114,6 +114,7 @@ Float divive(Float a, Float b) throws DivisionByZero;
 ## Examples
 
 - [Address Book](docs/examples/addressbook.tg)
+- [Event Tracker](docs/examples/event_tracker.tg)
 
 ## LICENSE
 
