@@ -32,8 +32,8 @@ error NameTooLong    { String message; }
 error PersonNotFound { String message; }
 
 
-function add_person(String name, Phone phone, Address address) returns Person throws NameNotUnique, NameTooLong;
+Person add_person(String name, Phone phone, Address address) throws NameNotUnique, NameTooLong;
 
-function remote_person(Integer person_id) throws PersonNotFound;
+void remote_person(Integer person_id) throws PersonNotFound;
 
-function send_sms(Integer person_id, String message) throws PersonNotFound;
+void send_sms(Integer person_id, String message) throws PersonNotFound;
