@@ -1,12 +1,11 @@
 %{
 
-#include <vector>
 #include <iostream>
-#include <string>
-#include <cstdlib>
-#include <cstdio>
 
 %}
+
+%option header-file="src/lexer.yy.h"
+%option noyywrap
 
 NUMBER [0-9][0-9]*
 
@@ -36,15 +35,3 @@ NUMBER [0-9][0-9]*
 . ;
 
 %%
-
-int main(int argc, char** argv) {
-  ++argv, --argc;  /* skip over program name */
-
-  if (argc > 0) {
-    yyin = fopen( argv[0], "r" );
-  } else {
-    yyin = stdin;
-  }
-
-  yylex();
-}

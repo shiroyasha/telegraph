@@ -341,6 +341,9 @@ void yyfree (void *  );
 
 /* Begin user sect3 */
 
+#define yywrap(n) 1
+#define YY_SKIP_YYWRAP
+
 typedef unsigned char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -494,13 +497,9 @@ char *yytext;
 #line 1 "src/lexer.l"
 #line 2 "src/lexer.l"
 
-#include <vector>
 #include <iostream>
-#include <string>
-#include <cstdlib>
-#include <cstdio>
 
-#line 504 "src/lexer.yy.c"
+#line 503 "src/lexer.yy.c"
 
 #define INITIAL 0
 
@@ -687,10 +686,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 13 "src/lexer.l"
+#line 12 "src/lexer.l"
 
 
-#line 694 "src/lexer.yy.c"
+#line 693 "src/lexer.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -775,96 +774,96 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "src/lexer.l"
+#line 14 "src/lexer.l"
 { std::cout << "left parenthesis: " << yytext << std::endl; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "src/lexer.l"
+#line 15 "src/lexer.l"
 { std::cout << "right parenthesis: " << yytext << std::endl; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "src/lexer.l"
+#line 17 "src/lexer.l"
 { std::cout << "left brace: " << yytext << std::endl; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "src/lexer.l"
+#line 18 "src/lexer.l"
 { std::cout << "right brace: " << yytext << std::endl; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "src/lexer.l"
+#line 19 "src/lexer.l"
 { std::cout << "semicolon : " << yytext << std::endl; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "src/lexer.l"
+#line 21 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "src/lexer.l"
+#line 22 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "src/lexer.l"
+#line 23 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "src/lexer.l"
+#line 24 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "src/lexer.l"
+#line 25 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "src/lexer.l"
+#line 26 "src/lexer.l"
 { std::cout << "keyword: " << yytext << std::endl; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 29 "src/lexer.l"
+#line 28 "src/lexer.l"
 { std::cout << "version number: " << yytext << std::endl; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 31 "src/lexer.l"
+#line 30 "src/lexer.l"
 { std::cout << "variable: " << yytext << std::endl; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 32 "src/lexer.l"
+#line 31 "src/lexer.l"
 { std::cout << "constant: " << yytext << std::endl; }
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 34 "src/lexer.l"
+#line 33 "src/lexer.l"
 ;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "src/lexer.l"
+#line 34 "src/lexer.l"
 ;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 36 "src/lexer.l"
+#line 35 "src/lexer.l"
 ;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 38 "src/lexer.l"
+#line 37 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 868 "src/lexer.yy.c"
+#line 867 "src/lexer.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1862,19 +1861,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 38 "src/lexer.l"
+#line 37 "src/lexer.l"
 
 
-
-int main(int argc, char** argv) {
-  ++argv, --argc;  /* skip over program name */
-
-  if (argc > 0) {
-    yyin = fopen( argv[0], "r" );
-  } else {
-    yyin = stdin;
-  }
-
-  yylex();
-}
 
