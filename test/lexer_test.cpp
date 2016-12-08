@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "lexer.yy.h"
-#include "token_types.hpp"
+#include "parser.tab.h"
 
 /* collect every token from the input */
 std::vector<int> lex(const char* input) {

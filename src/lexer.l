@@ -1,8 +1,10 @@
 %{
 
 #include <iostream>
-#include "token_types.hpp"
 
+/* #include "token_types.hpp" */
+
+#include "parser.tab.h"
 %}
 
 %option header-file="src/lexer.yy.h"
