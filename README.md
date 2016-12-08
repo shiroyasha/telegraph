@@ -35,7 +35,7 @@ void publish_message(Integer user_id, String message);
 
 | Type       | Description                                            |
 | -----------|--------------------------------------------------------|
-| SmallInt   | 4 bytes integer                                        |
+| SmallInt   | 2 bytes integer                                        |
 | Integer    | 4 bytes integer                                        |
 | BigInt     | 8 bytes integer                                        |
 | Float      | 4 bytes floating point number                          |
