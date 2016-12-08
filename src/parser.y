@@ -81,12 +81,17 @@ declaration_list:
 
 arg_list:
   /* nothing */
+  | declaration
   | declaration ',' declaration
   ;
 
 declaration:
-  CONSTANT VARIABLE { std::cout << "declaration found" << std::endl; }
+  type VARIABLE { std::cout << "declaration found" << std::endl; }
 
+type:
+  CONSTANT
+  | '[' CONSTANT ']'
+  ;
 
 throws:
   /* nothing */
