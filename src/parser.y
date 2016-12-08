@@ -12,15 +12,6 @@ void yyerror(const char *s) {
 
 %}
 
-%token COMMA
-%token LEFT_PARENTHESIS
-%token RIGHT_PARENTHESIS
-%token LEFT_BRACE
-%token RIGHT_BRACE
-
-%token COLON
-%token SEMICOLON
-
 %token KW_VERSION
 %token KW_STRUCT
 %token KW_ENUM
@@ -73,24 +64,24 @@ event:
 
 
 function:
-  CONSTANT VARIABLE LEFT_PARENTHESIS arg_list RIGHT_PARENTHESIS throws SEMICOLON { std::cout << "function found" << std::endl; }
-  | VARIABLE VARIABLE LEFT_PARENTHESIS arg_list RIGHT_PARENTHESIS throws SEMICOLON { std::cout << "function found" << std::endl; }
+    CONSTANT VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
+  | VARIABLE VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
   ;
 
 block:
-  LEFT_BRACE declaration_list RIGHT_BRACE { std::cout << "block found" << std::endl; }
+  '{' declaration_list '}' { std::cout << "block found" << std::endl; }
   ;
 
 
 declaration_list:
   /* nothing */
-  | declaration SEMICOLON declaration_list
+  | declaration ';' declaration_list
   ;
 
 
 arg_list:
   /* nothing */
-  | declaration COMMA declaration
+  | declaration ',' declaration
   ;
 
 declaration:
@@ -104,7 +95,7 @@ throws:
 
 throw_list:
   CONSTANT
-  | CONSTANT COLON throw_list
+  | CONSTANT ',' throw_list
   ;
 
 %%
