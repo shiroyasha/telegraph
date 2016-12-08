@@ -24,7 +24,7 @@ struct Person {
 
 event person_added         publishes Person;
 event person_removed       publishes Person;
-event person_got_a_message publishes { Person person; String message; }
+event person_got_a_message publishes { Person person; String message; };
 
 error PersonNotFound { String message; }
 error NameNotUnique  { String message; }
