@@ -23,7 +23,7 @@ bin/lexer.o: bin bin/parser.o src/lexer.l
 	$(CC) $(FLAGS) -c src/lexer.yy.c -o bin/lexer.o
 
 bin/parser.o: bin src/parser.y
-	yacc -o src/parser.tab.c -d src/parser.y
+	yacc --debug -o src/parser.tab.c -d src/parser.y
 	$(CC) $(FLAGS) -c src/parser.tab.c -o bin/parser.o
 
 bin/telegraph.o: bin src/telegraph.cpp

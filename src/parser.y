@@ -53,7 +53,7 @@ statement:
 
 
 version:
-  KW_VERSION CONSTANT { std::cout << "version found" << std::endl; }
+  KW_VERSION VERSION_NUMBER { std::cout << "version found" << std::endl; }
   ;
 
 
