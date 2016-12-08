@@ -30,36 +30,8 @@ User create_user(String username) throws UsernameAlreadyTaken;
 void publish_message(Integer user_id, String message);
 ```
 
-## Implementation Roadmap
-
-- [x] Lexing tokens
-- [x] Parsing syntax
-- [ ] Constructing AST
-- [ ] Semantic analysis
-
-### Concrete implementation for Ruby
-
-- [ ] Generating Ruby models based on structures
-- [ ] Generating Ruby RPC client
-- [ ] Generating Ruby RPC server
-- [ ] Generating Ruby Event publisher
-- [ ] Generating Ruby Event subscriber
-
-### Concrete implementation for JavaScript
-
-- [ ] Generating Ruby models based on structures
-- [ ] Generating Ruby RPC client
-- [ ] Generating Ruby RPC server
-- [ ] Generating Ruby Event publisher
-- [ ] Generating Ruby Event subscriber
-
-### Concrete implementation for Elixir
-
-- [ ] Generating Ruby models based on structures
-- [ ] Generating Ruby RPC client
-- [ ] Generating Ruby RPC server
-- [ ] Generating Ruby Event publisher
-- [ ] Generating Ruby Event subscriber
+Telegraph is still in early implementation phase. Please take a look at the
+[implementation roadmap][docs/roadmap.md].
 
 ## Types
 
