@@ -12,6 +12,7 @@ void yyerror(const char *s) {
 
 %}
 
+%token COMMA
 %token LEFT_PARENTHESIS
 %token RIGHT_PARENTHESIS
 %token LEFT_BRACE
@@ -39,7 +40,7 @@ void yyerror(const char *s) {
 
 input:
   /* empty line */
-  | statement SEMICOLON input { $$ = 1; }
+  | statement input { $$ = 1; }
   ;
 
 
@@ -73,7 +74,7 @@ event:
 
 function:
   CONSTANT VARIABLE LEFT_PARENTHESIS arg_list RIGHT_PARENTHESIS throws SEMICOLON { std::cout << "function found" << std::endl; }
-  VARIABLE VARIABLE LEFT_PARENTHESIS arg_list RIGHT_PARENTHESIS throws SEMICOLON { std::cout << "function found" << std::endl; }
+  | VARIABLE VARIABLE LEFT_PARENTHESIS arg_list RIGHT_PARENTHESIS throws SEMICOLON { std::cout << "function found" << std::endl; }
   ;
 
 block:
@@ -89,7 +90,7 @@ declaration_list:
 
 arg_list:
   /* nothing */
-  | declaration COLON declaration
+  | declaration COMMA declaration
   ;
 
 declaration:

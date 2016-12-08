@@ -45,41 +45,43 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    LEFT_PARENTHESIS = 258,
-    RIGHT_PARENTHESIS = 259,
-    LEFT_BRACE = 260,
-    RIGHT_BRACE = 261,
-    COLON = 262,
-    SEMICOLON = 263,
-    KW_VERSION = 264,
-    KW_STRUCT = 265,
-    KW_ENUM = 266,
-    KW_EVENT = 267,
-    KW_PUBLISHES = 268,
-    KW_ERROR = 269,
-    KW_THROWS = 270,
-    VERSION_NUMBER = 271,
-    VARIABLE = 272,
-    CONSTANT = 273
+    COMMA = 258,
+    LEFT_PARENTHESIS = 259,
+    RIGHT_PARENTHESIS = 260,
+    LEFT_BRACE = 261,
+    RIGHT_BRACE = 262,
+    COLON = 263,
+    SEMICOLON = 264,
+    KW_VERSION = 265,
+    KW_STRUCT = 266,
+    KW_ENUM = 267,
+    KW_EVENT = 268,
+    KW_PUBLISHES = 269,
+    KW_ERROR = 270,
+    KW_THROWS = 271,
+    VERSION_NUMBER = 272,
+    VARIABLE = 273,
+    CONSTANT = 274
   };
 #endif
 /* Tokens.  */
-#define LEFT_PARENTHESIS 258
-#define RIGHT_PARENTHESIS 259
-#define LEFT_BRACE 260
-#define RIGHT_BRACE 261
-#define COLON 262
-#define SEMICOLON 263
-#define KW_VERSION 264
-#define KW_STRUCT 265
-#define KW_ENUM 266
-#define KW_EVENT 267
-#define KW_PUBLISHES 268
-#define KW_ERROR 269
-#define KW_THROWS 270
-#define VERSION_NUMBER 271
-#define VARIABLE 272
-#define CONSTANT 273
+#define COMMA 258
+#define LEFT_PARENTHESIS 259
+#define RIGHT_PARENTHESIS 260
+#define LEFT_BRACE 261
+#define RIGHT_BRACE 262
+#define COLON 263
+#define SEMICOLON 264
+#define KW_VERSION 265
+#define KW_STRUCT 266
+#define KW_ENUM 267
+#define KW_EVENT 268
+#define KW_PUBLISHES 269
+#define KW_ERROR 270
+#define KW_THROWS 271
+#define VERSION_NUMBER 272
+#define VARIABLE 273
+#define CONSTANT 274
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

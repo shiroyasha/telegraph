@@ -19,6 +19,7 @@ NUMBER [0-9][0-9]*
 "{" { return LEFT_BRACE; }
 "}" { return RIGHT_BRACE; }
 ";" { return SEMICOLON; }
+"," { return COMMA; }
 
 "version"   { return KW_VERSION; }
 "struct"    { return KW_STRUCT; }
