@@ -30,6 +30,11 @@ User create_user(String username) throws UsernameAlreadyTaken;
 void publish_message(Integer user_id, String message);
 ```
 
+## Implementation Roadmap
+
+- [x] Lexing tokens
+- [x] Parsing syntax
+- [ ] Constructing AST
 
 ## Types
 
