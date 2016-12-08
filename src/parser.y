@@ -59,13 +59,13 @@ error_def:
 
 
 event:
-  KW_EVENT VARIABLE KW_PUBLISHES CONSTANT { std::cout << "event found" << std::endl; }
+  KW_EVENT VARIABLE KW_PUBLISHES CONSTANT ';' { std::cout << "event found" << std::endl; }
   ;
 
 
 function:
-    CONSTANT VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
-  | VARIABLE VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
+    type VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
+  | "void" VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
   ;
 
 block:
