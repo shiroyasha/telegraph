@@ -13,6 +13,7 @@ enum Tokens {
   KW_STRUCT,
   KW_ENUM,
   KW_EVENT,
+  KW_PUBLISHES,
   KW_ERROR,
   KW_THROWS,
 

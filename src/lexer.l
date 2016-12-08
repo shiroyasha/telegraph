@@ -12,24 +12,23 @@ NUMBER [0-9][0-9]*
 
 %%
 
-"(" { std::cout << "left parenthesis: " << yytext << std::endl; return LEFT_PARENTHESIS; }
-")" { std::cout << "right parenthesis: " << yytext << std::endl; return RIGHT_PARENTHESIS;}
-"{" { std::cout << "left brace: " << yytext << std::endl; return LEFT_BRACE; }
-"}" { std::cout << "right brace: " << yytext << std::endl; return RIGHT_BRACE; }
+"(" { return LEFT_PARENTHESIS; }
+")" { return RIGHT_PARENTHESIS;}
+"{" { return LEFT_BRACE; }
+"}" { return RIGHT_BRACE; }
+";" { return SEMICOLON; }
 
-";" { std::cout << "semicolon : " << yytext << std::endl; return SEMICOLON; }
+"version"   { return KW_VERSION; }
+"struct"    { return KW_STRUCT; }
+"enum"      { return KW_ENUM; }
+"event"     { return KW_EVENT; }
+"publishes" { return KW_PUBLISHES; }
+"error"     { return KW_ERROR; }
+"throws"    { return KW_THROWS; }
 
-"version" { std::cout << "keyword: " << yytext << std::endl; return KW_VERSION; }
-"struct"  { std::cout << "keyword: " << yytext << std::endl; return KW_STRUCT; }
-"enum"    { std::cout << "keyword: " << yytext << std::endl; return KW_ENUM; }
-"event"   { std::cout << "keyword: " << yytext << std::endl; return KW_ERROR; }
-"error"   { std::cout << "keyword: " << yytext << std::endl; return KW_ERROR; }
-"throws"  { std::cout << "keyword: " << yytext << std::endl; return KW_THROWS; }
-
-{NUMBER}"."{NUMBER}"."{NUMBER} { std::cout << "version number: " << yytext << std::endl; return VERSION_NUMBER; }
-
-[a-z][A-Za-z0-9_]* { std::cout << "variable: " << yytext << std::endl; return VARIABLE; }
-[A-Z][A-Za-z0-9_]* { std::cout << "constant: " << yytext << std::endl; return CONSTANT; }
+{NUMBER}"."{NUMBER}"."{NUMBER} { return VERSION_NUMBER; }
+[a-z][A-Za-z0-9_]*             { return VARIABLE; }
+[A-Z][A-Za-z0-9_]*             { return CONSTANT; }
 
 \n ;
 [ \t] ;
