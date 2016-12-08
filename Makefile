@@ -36,7 +36,7 @@ bin/tests/lexer_test.o: bin/tests test/lexer_test.cpp
 # binaries
 
 bin/telegraph: bin/lexer.o bin/parser.o bin/telegraph.o
-	$(CC) $(FLAGS) bin/lexer.o bin/telegraph.o -o bin/telegraph
+	$(CC) $(FLAGS) bin/lexer.o bin/parser.o bin/telegraph.o -o bin/telegraph
 
 bin/tests/lexer_test: bin/tests bin/lexer.o bin/tests/lexer_test.o
-	$(CC) $(FLAGS) bin/lexer.o bin/tests/lexer_test.o $(TEST_LIBS) -o bin/tests/lexer_test
+	$(CC) $(FLAGS) bin/lexer.o bin/parser.o bin/tests/lexer_test.o $(TEST_LIBS) -o bin/tests/lexer_test

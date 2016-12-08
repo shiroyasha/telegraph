@@ -49,17 +49,18 @@ extern int yydebug;
     RIGHT_PARENTHESIS = 259,
     LEFT_BRACE = 260,
     RIGHT_BRACE = 261,
-    SEMICOLON = 262,
-    KW_VERSION = 263,
-    KW_STRUCT = 264,
-    KW_ENUM = 265,
-    KW_EVENT = 266,
-    KW_PUBLISHES = 267,
-    KW_ERROR = 268,
-    KW_THROWS = 269,
-    VERSION_NUMBER = 270,
-    VARIABLE = 271,
-    CONSTANT = 272
+    COLON = 262,
+    SEMICOLON = 263,
+    KW_VERSION = 264,
+    KW_STRUCT = 265,
+    KW_ENUM = 266,
+    KW_EVENT = 267,
+    KW_PUBLISHES = 268,
+    KW_ERROR = 269,
+    KW_THROWS = 270,
+    VERSION_NUMBER = 271,
+    VARIABLE = 272,
+    CONSTANT = 273
   };
 #endif
 /* Tokens.  */
@@ -67,17 +68,18 @@ extern int yydebug;
 #define RIGHT_PARENTHESIS 259
 #define LEFT_BRACE 260
 #define RIGHT_BRACE 261
-#define SEMICOLON 262
-#define KW_VERSION 263
-#define KW_STRUCT 264
-#define KW_ENUM 265
-#define KW_EVENT 266
-#define KW_PUBLISHES 267
-#define KW_ERROR 268
-#define KW_THROWS 269
-#define VERSION_NUMBER 270
-#define VARIABLE 271
-#define CONSTANT 272
+#define COLON 262
+#define SEMICOLON 263
+#define KW_VERSION 264
+#define KW_STRUCT 265
+#define KW_ENUM 266
+#define KW_EVENT 267
+#define KW_PUBLISHES 268
+#define KW_ERROR 269
+#define KW_THROWS 270
+#define VERSION_NUMBER 271
+#define VARIABLE 272
+#define CONSTANT 273
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -86,8 +88,21 @@ typedef int YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
 
-extern YYSTYPE yylval;
+
 
 int yyparse (void);
 

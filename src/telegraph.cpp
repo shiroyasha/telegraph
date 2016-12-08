@@ -4,6 +4,7 @@
 #include <cstdio>
 
 #include "lexer.yy.h"
+#include "parser.tab.h"
 
 int main(int argc, char** argv) {
   ++argv, --argc;  /* skip over program name */
@@ -14,5 +15,5 @@ int main(int argc, char** argv) {
     yyin = stdin;
   }
 
-  yylex();
+  return yyparse();
 }
