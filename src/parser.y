@@ -39,6 +39,7 @@ statement:
   version
   | struct
   | error_def
+  | enum
   | event
   | function
   ;
@@ -51,6 +52,10 @@ version:
 
 struct:
   KW_STRUCT CONSTANT block { std::cout << "struct found" << std::endl; }
+  ;
+
+enum:
+  KW_ENUM CONSTANT '{' constant_list '}' { std::cout << "enum found" << std::endl; }
   ;
 
 error_def:
@@ -95,12 +100,12 @@ type:
 
 throws:
   /* nothing */
-  | KW_THROWS throw_list
+  | KW_THROWS constant_list
   ;
 
-throw_list:
+constant_list:
   CONSTANT
-  | CONSTANT ',' throw_list
+  | CONSTANT ',' constant_list
   ;
 
 %%
