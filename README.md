@@ -35,6 +35,31 @@ void publish_message(Integer user_id, String message);
 - [x] Lexing tokens
 - [x] Parsing syntax
 - [ ] Constructing AST
+- [ ] Semantic analysis
+
+### Concrete implementation for Ruby
+
+- [ ] Generating Ruby models based on structures
+- [ ] Generating Ruby RPC client
+- [ ] Generating Ruby RPC server
+- [ ] Generating Ruby Event publisher
+- [ ] Generating Ruby Event subscriber
+
+### Concrete implementation for JavaScript
+
+- [ ] Generating Ruby models based on structures
+- [ ] Generating Ruby RPC client
+- [ ] Generating Ruby RPC server
+- [ ] Generating Ruby Event publisher
+- [ ] Generating Ruby Event subscriber
+
+### Concrete implementation for Elixir
+
+- [ ] Generating Ruby models based on structures
+- [ ] Generating Ruby RPC client
+- [ ] Generating Ruby RPC server
+- [ ] Generating Ruby Event publisher
+- [ ] Generating Ruby Event subscriber
 
 ## Types
 
