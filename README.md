@@ -31,7 +31,7 @@ void publish_message(Integer user_id, String message);
 ```
 
 Telegraph is still in early implementation phase. Please take a look at the
-[implementation roadmap][docs/roadmap.md].
+[implementation roadmap](docs/roadmap.md).
 
 ## Types
 
