@@ -25,7 +25,7 @@ void yyerror(const char *s) {
 %%
 
 input       : /* empty line */
-            | statement input { $$ = 1; }
+            | input statement { $$ = 1; }
             ;
 
 statement   : version
