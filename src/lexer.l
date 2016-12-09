@@ -23,8 +23,7 @@ NUMBER [0-9][0-9]*
 "throws"    { return KW_THROWS; }
 
 {NUMBER}"."{NUMBER}"."{NUMBER} { return VERSION_NUMBER; }
-[a-z][A-Za-z0-9_]*             { return VARIABLE; }
-[A-Z][A-Za-z0-9_]*             { return CONSTANT; }
+[a-zA-Z_][A-Za-z0-9_]*         { return IDENTIFIER; }
 
 \n ;
 [ \t] ;

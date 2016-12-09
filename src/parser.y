@@ -1,8 +1,5 @@
 %{
 #include <iostream>
-/* #include <cstdlib> */
-/* #include <cmath> */
-
 #include "lexer.yy.h"
 
 void yyerror(const char *s) {
@@ -21,92 +18,68 @@ void yyerror(const char *s) {
 %token KW_THROWS
 
 %token VERSION_NUMBER
-
-%token VARIABLE
-%token CONSTANT
+%token IDENTIFIER
 
 %start input
 
 %%
 
-input:
-  /* empty line */
-  | statement input { $$ = 1; }
-  ;
+input       : /* empty line */
+            | statement input { $$ = 1; }
+            ;
+
+statement   : version
+            | struct
+            | error_def
+            | enum
+            | event
+            | function
+            ;
+
+version     : KW_VERSION VERSION_NUMBER { std::cout << "version found" << std::endl; } ;
+
+struct      : KW_STRUCT IDENTIFIER block { std::cout << "struct found" << std::endl; } ;
+
+enum        : KW_ENUM IDENTIFIER '{' id_list '}' { std::cout << "enum found" << std::endl; } ;
+
+error_def   : KW_ERROR IDENTIFIER block { std::cout << "error found" << std::endl; } ;
+
+event       : KW_EVENT IDENTIFIER KW_PUBLISHES type ';' { std::cout << "event found" << std::endl; }
+            | KW_EVENT IDENTIFIER KW_PUBLISHES block ';' { std::cout << "event found" << std::endl; } ;
 
 
-statement:
-  version
-  | struct
-  | error_def
-  | enum
-  | event
-  | function
-  ;
+function    : type IDENTIFIER '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; } ;
 
 
-version:
-  KW_VERSION VERSION_NUMBER { std::cout << "version found" << std::endl; }
-  ;
+block       : '{' dec_list '}' { std::cout << "block found" << std::endl; } ;
 
 
-struct:
-  KW_STRUCT CONSTANT block { std::cout << "struct found" << std::endl; }
-  ;
+dec_list    : /* nothing */
+            | dec_list declaration
+            ;
 
-enum:
-  KW_ENUM CONSTANT '{' constant_list '}' { std::cout << "enum found" << std::endl; }
-  ;
+declaration : type IDENTIFIER ';' { std::cout << "declaration found" << std::endl; }
+            ;
 
-error_def:
-  KW_ERROR CONSTANT block { std::cout << "error found" << std::endl; }
-  ;
+arg_list    : /* nothing */
+            | arg
+            | arg_list ',' arg
+            ;
 
-
-event:
-  KW_EVENT VARIABLE KW_PUBLISHES CONSTANT ';' { std::cout << "event found" << std::endl; }
-  | KW_EVENT VARIABLE KW_PUBLISHES block ';' { std::cout << "event found" << std::endl; }
-  ;
+arg         : type IDENTIFIER { std::cout << "argument found" << std::endl; }
+            ;
 
 
-function:
-    type VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
-  | VARIABLE VARIABLE '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; }
-  ;
+type        : IDENTIFIER
+            | '[' IDENTIFIER ']'
+            ;
 
-block:
-  '{' declaration_list '}' { std::cout << "block found" << std::endl; }
-  ;
+throws      : /* nothing */
+            | KW_THROWS id_list
+            ;
 
-
-declaration_list:
-  /* nothing */
-  | declaration ';' declaration_list
-  ;
-
-
-arg_list:
-  /* nothing */
-  | declaration
-  | declaration ',' arg_list
-  ;
-
-declaration:
-  type VARIABLE { std::cout << "declaration found" << std::endl; }
-
-type:
-  CONSTANT
-  | '[' CONSTANT ']'
-  ;
-
-throws:
-  /* nothing */
-  | KW_THROWS constant_list
-  ;
-
-constant_list:
-  CONSTANT
-  | CONSTANT ',' constant_list
-  ;
+id_list     : IDENTIFIER
+            | id_list ',' IDENTIFIER
+            ;
 
 %%

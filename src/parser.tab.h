@@ -53,8 +53,7 @@ extern int yydebug;
     KW_ERROR = 263,
     KW_THROWS = 264,
     VERSION_NUMBER = 265,
-    VARIABLE = 266,
-    CONSTANT = 267
+    IDENTIFIER = 266
   };
 #endif
 /* Tokens.  */
@@ -66,8 +65,7 @@ extern int yydebug;
 #define KW_ERROR 263
 #define KW_THROWS 264
 #define VERSION_NUMBER 265
-#define VARIABLE 266
-#define CONSTANT 267
+#define IDENTIFIER 266
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
