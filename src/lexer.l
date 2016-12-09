@@ -22,8 +22,15 @@ NUMBER [0-9][0-9]*
 "error"     { return KW_ERROR; }
 "throws"    { return KW_THROWS; }
 
-{NUMBER}"."{NUMBER}"."{NUMBER} { return VERSION_NUMBER; }
-[a-zA-Z_][A-Za-z0-9_]*         { return IDENTIFIER; }
+{NUMBER}"."{NUMBER}"."{NUMBER} {
+  yylval.value = new ast::VersionNumber(yytext);
+  return VERSION_NUMBER;
+}
+
+[a-zA-Z_][A-Za-z0-9_]* {
+  yylval.value = new ast::Identifier(yytext);
+  return IDENTIFIER;
+}
 
 \n ;
 [ \t] ;

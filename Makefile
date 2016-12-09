@@ -1,7 +1,7 @@
 .PHONY: all test
 
 CC = g++
-CFLAGS = --std=c++11 -I src -c
+CFLAGS = --std=c++11 -I src -I src/ast -c
 TEST_LIBS = -lpthread -lgtest
 
 all: bin/telegraph

@@ -24,8 +24,8 @@ void yyerror(const char *s) {
 
 %%
 
-input       : /* empty line */
-            | input statement { $$ = 1; }
+input       : /* empty line */ { $$ = new ast::Telegraph(); }
+            | input statement  { $$ = $1.add_statement($2); }
             ;
 
 statement   : version
@@ -36,50 +36,52 @@ statement   : version
             | function
             ;
 
-version     : KW_VERSION VERSION_NUMBER { std::cout << "version found" << std::endl; } ;
-
-struct      : KW_STRUCT IDENTIFIER block { std::cout << "struct found" << std::endl; } ;
-
-enum        : KW_ENUM IDENTIFIER '{' id_list '}' { std::cout << "enum found" << std::endl; } ;
-
-error_def   : KW_ERROR IDENTIFIER block { std::cout << "error found" << std::endl; } ;
-
-event       : KW_EVENT IDENTIFIER KW_PUBLISHES type ';' { std::cout << "event found" << std::endl; }
-            | KW_EVENT IDENTIFIER KW_PUBLISHES block ';' { std::cout << "event found" << std::endl; } ;
-
-
-function    : type IDENTIFIER '(' arg_list ')' throws ';' { std::cout << "function found" << std::endl; } ;
-
-
-block       : '{' dec_list '}' { std::cout << "block found" << std::endl; } ;
-
-
-dec_list    : /* nothing */
-            | dec_list declaration
+version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($1) }
             ;
 
-declaration : type IDENTIFIER ';' { std::cout << "declaration found" << std::endl; }
+struct      : KW_STRUCT IDENTIFIER block { $$ = new ast::Struct($2, $3); }
             ;
 
-arg_list    : /* nothing */
-            | arg
-            | arg_list ',' arg
+enum        : KW_ENUM IDENTIFIER '{' id_list '}' { $$ = new ast::Enum($2, $4); }
             ;
 
-arg         : type IDENTIFIER { std::cout << "argument found" << std::endl; }
+error_def   : KW_ERROR IDENTIFIER block { $$ = new ast::Error($2, $3); }
+
+event       : KW_EVENT IDENTIFIER KW_PUBLISHES type ';'  { $$ = new ast::Event($2, $4); }
+            | KW_EVENT IDENTIFIER KW_PUBLISHES block ';' { $$ = new ast::Event($2, $4); }
+
+function    : type IDENTIFIER '(' arg_list ')' throws ';' { $$ = new ast::Function($2, $1, $4, $6); }
+            ;
+
+block       : '{' dec_list '}' { $$ = new ast::Block($2); }
+            ;
+
+dec_list    : /* nothing */         { $$ = new ast::DeclarationList(); }
+            | dec_list declaration  { $$ = $1.add_declaration($2); }
+            ;
+
+declaration : type IDENTIFIER ';' { $$ = new ast::Declaration($1, $2); }
+            ;
+
+arg_list    : /* nothing */     { $$ = new ast::ArgumentList(); }
+            | arg               { $$ = new ast::ArgumentList($1); }
+            | arg_list ',' arg  { $$ = $1.push_back($3); }
+            ;
+
+arg         : type IDENTIFIER { $$ = new ast::Argument($2, $1); }
             ;
 
 
-type        : IDENTIFIER
-            | '[' IDENTIFIER ']'
+type        : IDENTIFIER          { $$ = new ast::Type($1); }
+            | '[' IDENTIFIER ']'  { $$ = new ast::Array($2); }
             ;
 
-throws      : /* nothing */
-            | KW_THROWS id_list
+throws      : /* nothing */       { $$ = new ast::ThrowList(); }
+            | KW_THROWS id_list   { $$ = new ast::ThrowList($2); }
             ;
 
-id_list     : IDENTIFIER
-            | id_list ',' IDENTIFIER
+id_list     : IDENTIFIER             { $$ = new ast::IdentifierList($1); }
+            | id_list ',' IDENTIFIER { $$ = $1.add($3); }
             ;
 
 %%
