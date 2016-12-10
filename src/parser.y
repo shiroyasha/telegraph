@@ -25,7 +25,7 @@ void yyerror(const char *s) {
 %%
 
 input       : /* empty line */ { $$ = new ast::Telegraph(); }
-            | input statement  { $$ = $1.add_statement($2); }
+            | input statement  { $$ = $1.add($2); std::cout << $$.toString() << std::endl; }
             ;
 
 statement   : version
@@ -57,7 +57,7 @@ block       : '{' dec_list '}' { $$ = new ast::Block($2); }
             ;
 
 dec_list    : /* nothing */         { $$ = new ast::DeclarationList(); }
-            | dec_list declaration  { $$ = $1.add_declaration($2); }
+            | dec_list declaration  { $$ = $1.add($2); }
             ;
 
 declaration : type IDENTIFIER ';' { $$ = new ast::Declaration($1, $2); }
@@ -65,7 +65,7 @@ declaration : type IDENTIFIER ';' { $$ = new ast::Declaration($1, $2); }
 
 arg_list    : /* nothing */     { $$ = new ast::ArgumentList(); }
             | arg               { $$ = new ast::ArgumentList($1); }
-            | arg_list ',' arg  { $$ = $1.push_back($3); }
+            | arg_list ',' arg  { $$ = $1.add($3); }
             ;
 
 arg         : type IDENTIFIER { $$ = new ast::Argument($2, $1); }
