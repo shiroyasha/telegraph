@@ -63,7 +63,7 @@ void yyerror(const char *s) {
 
 %%
 
-start       : telegraph { $$ = $1; std::cout << $$->toString() << std::endl; }
+start       : telegraph { $$ = $1; $$->display(); }
             ;
 
 telegraph   :

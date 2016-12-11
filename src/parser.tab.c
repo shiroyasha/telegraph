@@ -1277,7 +1277,7 @@ yyreduce:
     {
         case 2:
 #line 66 "src/parser.y" /* yacc.c:1646  */
-    { (yyval.telegraph) = (yyvsp[0].telegraph); std::cout << (yyval.telegraph)->toString() << std::endl; }
+    { (yyval.telegraph) = (yyvsp[0].telegraph); (yyval.telegraph)->display(); }
 #line 1282 "src/parser.tab.c" /* yacc.c:1646  */
     break;
 
