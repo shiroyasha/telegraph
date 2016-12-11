@@ -16,6 +16,15 @@ void tokenize() {
   }
 }
 
+void parse() {
+  ast::Telegraph* result = new ast::Telegraph();
+
+  yyparse(result);
+
+  result->display();
+
+  delete result;
+}
 
 int main(int argc, char** argv) {
   int mode = PARSE;
@@ -31,12 +40,14 @@ int main(int argc, char** argv) {
   }
 
   if (mode == PARSE) {
-    return yyparse();
+    parse();
+    return 0;
   }
 
   if (mode == DEBUG) {
     yydebug = 1;
-    return yyparse();
+    parse();
+    return 0;
   }
 
   if (mode == TOKENIZE) {

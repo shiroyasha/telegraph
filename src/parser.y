@@ -3,12 +3,14 @@
 #include "lexer.yy.h"
 #include "ast/ast.hpp"
 
-void yyerror(const char *s) {
+void yyerror(ast::Telegraph* r, const char* s) {
   std::cout << "EEK, parse error!  Message: " << s << std::endl;
   exit(-1);
 }
 
 %}
+
+%parse-param {ast::Telegraph* result}
 
 %union {
   ast::Argument* argument;
@@ -25,7 +27,6 @@ void yyerror(const char *s) {
   ast::IdentifierList* identifier_list;
   ast::Node* node;
   ast::Struct* structure;
-  ast::Telegraph* telegraph;
   ast::ThrowList* throw_list;
   ast::Type* type;
   ast::Version* version;
@@ -43,7 +44,6 @@ void yyerror(const char *s) {
 %token <version_number> VERSION_NUMBER
 %token <identifier> IDENTIFIER
 
-%type <telegraph> start telegraph
 %type <version> version
 %type <structure> struct
 %type <enumeration> enum
@@ -59,21 +59,18 @@ void yyerror(const char *s) {
 %type <throw_list> throws
 %type <identifier_list> id_list
 
-%start start
+%start telegraph
 
 %%
 
-start       : telegraph { $$ = $1; $$->display(); }
-            ;
-
 telegraph   :
-            /* empty line */       { $$ = new ast::Telegraph(); }
-            | telegraph version    { $1->set_version($2);  $$ = $1; }
-            | telegraph struct     { $1->add_struct($2);   $$ = $1; }
-            | telegraph error_def  { $1->add_error($2);    $$ = $1; }
-            | telegraph enum       { $1->add_enum($2);     $$ = $1; }
-            | telegraph event      { $1->add_event($2);    $$ = $1; }
-            | telegraph function   { $1->add_function($2); $$ = $1; }
+            /* empty line */
+            | telegraph version    { result->set_version($2);  }
+            | telegraph struct     { result->add_struct($2);   }
+            | telegraph error_def  { result->add_error($2);    }
+            | telegraph enum       { result->add_enum($2);     }
+            | telegraph event      { result->add_event($2);    }
+            | telegraph function   { result->add_function($2); }
             ;
 
 version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($2); }

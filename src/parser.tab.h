@@ -72,7 +72,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 13 "src/parser.y" /* yacc.c:1909  */
+#line 15 "src/parser.y" /* yacc.c:1909  */
 
   ast::Argument* argument;
   ast::ArgumentList* argument_list;
@@ -88,13 +88,12 @@ union YYSTYPE
   ast::IdentifierList* identifier_list;
   ast::Node* node;
   ast::Struct* structure;
-  ast::Telegraph* telegraph;
   ast::ThrowList* throw_list;
   ast::Type* type;
   ast::Version* version;
   ast::VersionNumber* version_number;
 
-#line 98 "src/parser.tab.h" /* yacc.c:1909  */
+#line 97 "src/parser.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -103,6 +102,6 @@ union YYSTYPE
 
 extern YYSTYPE yylval;
 
-int yyparse (void);
+int yyparse (ast::Telegraph* result);
 
 #endif /* !YY_YY_SRC_PARSER_TAB_H_INCLUDED  */
