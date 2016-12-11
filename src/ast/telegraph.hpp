@@ -47,9 +47,17 @@ namespace ast {
       result += m_version->toString() + "\n\n";
 
       for(auto n : m_enums)      { result += n->toString() + "\n"; }
+      result += "\n";
+
       for(auto n : m_errors)     { result += n->toString() + "\n"; }
+      result += "\n";
+
       for(auto n : m_structures) { result += n->toString() + "\n"; }
+      result += "\n";
+
       for(auto n : m_events)     { result += n->toString() + "\n"; }
+      result += "\n";
+
       for(auto n : m_functions)  { result += n->toString() + "\n"; }
 
       return result;
