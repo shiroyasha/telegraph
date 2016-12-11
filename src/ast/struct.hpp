@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/identifier"
-#include "ast/block"
+#include "ast/node.hpp"
+#include "ast/identifier.hpp"
+#include "ast/block.hpp"
 
 namespace ast {
   class Struct : public Node {

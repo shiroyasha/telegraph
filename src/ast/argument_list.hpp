@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/argument"
+#include "ast/node.hpp"
+#include "ast/argument.hpp"
 
 namespace ast {
   class ArgumentList : public Node {

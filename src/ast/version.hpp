@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/version_number"
+#include "ast/node.hpp"
+#include "ast/version_number.hpp"
 
 namespace ast {
   class Version : public Node {

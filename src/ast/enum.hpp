@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/identifier_list"
+#include "ast/node.hpp"
+#include "ast/identifier_list.hpp"
 
 namespace ast {
   class Enum : public Node {

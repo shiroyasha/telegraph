@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "ast/ast.hpp"
 #include "lexer.yy.h"
 #include "parser.tab.h"
 

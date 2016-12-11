@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/declaration"
+#include "ast/node.hpp"
+#include "ast/declaration.hpp"
 
 namespace ast {
   class DeclarationList : public Node {

@@ -5,6 +5,7 @@
 /* #include "token_types.hpp" */
 
 #include "parser.tab.h"
+#include "ast/ast.hpp"
 %}
 
 %option header-file="src/lexer.yy.h"

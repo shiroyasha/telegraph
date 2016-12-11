@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/identifier"
+#include "ast/node.hpp"
+#include "ast/identifier.hpp"
 
 namespace ast {
   class Type : public Node {

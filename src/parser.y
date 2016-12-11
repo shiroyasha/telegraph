@@ -1,11 +1,14 @@
 %{
 #include <iostream>
 #include "lexer.yy.h"
+#include "ast/ast.hpp"
 
 void yyerror(const char *s) {
   std::cout << "EEK, parse error!  Message: " << s << std::endl;
   exit(-1);
 }
+
+#define YYSTYPE ast::Node*
 
 %}
 
@@ -24,8 +27,9 @@ void yyerror(const char *s) {
 
 %%
 
-input       : /* empty line */ { $$ = new ast::Telegraph(); }
-            | input statement  { $$ = $1.add($2); std::cout << $$.toString() << std::endl; }
+input       :
+            /* empty line */ { $$ = new ast::Telegraph(); }
+            | input statement  { $$ = $1->add($2); std::cout << $$->toString() << std::endl; }
             ;
 
 statement   : version
@@ -36,7 +40,7 @@ statement   : version
             | function
             ;
 
-version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($1) }
+version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($1); }
             ;
 
 struct      : KW_STRUCT IDENTIFIER block { $$ = new ast::Struct($2, $3); }
@@ -56,16 +60,18 @@ function    : type IDENTIFIER '(' arg_list ')' throws ';' { $$ = new ast::Functi
 block       : '{' dec_list '}' { $$ = new ast::Block($2); }
             ;
 
-dec_list    : /* nothing */         { $$ = new ast::DeclarationList(); }
-            | dec_list declaration  { $$ = $1.add($2); }
+dec_list    :
+            /* nothing */           { $$ = new ast::DeclarationList(); }
+            | dec_list declaration  { $$ = $1->add($2); }
             ;
 
 declaration : type IDENTIFIER ';' { $$ = new ast::Declaration($1, $2); }
             ;
 
-arg_list    : /* nothing */     { $$ = new ast::ArgumentList(); }
+arg_list    :
+            /* nothing */       { $$ = new ast::ArgumentList(); }
             | arg               { $$ = new ast::ArgumentList($1); }
-            | arg_list ',' arg  { $$ = $1.add($3); }
+            | arg_list ',' arg  { $$ = $1->add($3); }
             ;
 
 arg         : type IDENTIFIER { $$ = new ast::Argument($2, $1); }
@@ -76,12 +82,13 @@ type        : IDENTIFIER          { $$ = new ast::Type($1); }
             | '[' IDENTIFIER ']'  { $$ = new ast::Array($2); }
             ;
 
-throws      : /* nothing */       { $$ = new ast::ThrowList(); }
+throws      :
+            /* nothing */         { $$ = new ast::ThrowList(); }
             | KW_THROWS id_list   { $$ = new ast::ThrowList($2); }
             ;
 
 id_list     : IDENTIFIER             { $$ = new ast::IdentifierList($1); }
-            | id_list ',' IDENTIFIER { $$ = $1.add($3); }
+            | id_list ',' IDENTIFIER { $$ = $1->add($3); }
             ;
 
 %%

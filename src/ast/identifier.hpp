@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast/node"
 #include <string>
+#include "ast/node.hpp"
 
 namespace ast {
   class Event : public Node {

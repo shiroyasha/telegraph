@@ -1,10 +1,10 @@
 #pragma once
 
-#include "ast/node"
-#include "ast/identifier"
-#include "ast/argument_list"
-#include "ast/throw_list"
-#include "ast/type"
+#include "ast/node.hpp"
+#include "ast/identifier.hpp"
+#include "ast/argument_list.hpp"
+#include "ast/throw_list.hpp"
+#include "ast/type.hpp"
 
 namespace ast {
   class Event : public Node {
