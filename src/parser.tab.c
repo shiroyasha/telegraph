@@ -1265,7 +1265,7 @@ yyreduce:
 
   case 10:
 #line 43 "src/parser.y" /* yacc.c:1646  */
-    { (yyval) = new ast::Version((ast::VersionNumber*)(yyvsp[-1])); }
+    { (yyval) = new ast::Version((ast::VersionNumber*)(yyvsp[0])); }
 #line 1270 "src/parser.tab.c" /* yacc.c:1646  */
     break;
 

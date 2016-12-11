@@ -40,7 +40,7 @@ statement   : version
             | function
             ;
 
-version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version((ast::VersionNumber*)$1); }
+version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version((ast::VersionNumber*)$2); }
             ;
 
 struct      : KW_STRUCT IDENTIFIER block { $$ = new ast::Struct((ast::Identifier*)$2, (ast::Block*)$3); }
