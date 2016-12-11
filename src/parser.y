@@ -8,9 +8,29 @@ void yyerror(const char *s) {
   exit(-1);
 }
 
-#define YYSTYPE ast::Node*
-
 %}
+
+%union {
+  ast::Argument* argument;
+  ast::ArgumentList* argument_list;
+  ast::Array* array;
+  ast::Block* block;
+  ast::Declaration* declaration;
+  ast::DeclarationList* declaration_list;
+  ast::Enum* enumeration;
+  ast::Error* error;
+  ast::Event* event;
+  ast::Function* function;
+  ast::Identifier* identifier;
+  ast::IdentifierList* identifier_list;
+  ast::Node* node;
+  ast::Struct* structure;
+  ast::Telegraph* telegraph;
+  ast::ThrowList* throw_list;
+  ast::Type* type;
+  ast::Version* version;
+  ast::VersionNumber* version_number;
+}
 
 %token KW_VERSION
 %token KW_STRUCT
@@ -20,8 +40,24 @@ void yyerror(const char *s) {
 %token KW_ERROR
 %token KW_THROWS
 
-%token VERSION_NUMBER
-%token IDENTIFIER
+%token <version_number> VERSION_NUMBER
+%token <identifier> IDENTIFIER
+
+%type <node> input statement
+%type <version> version
+%type <structure> struct
+%type <enumeration> enum
+%type <error> error_def
+%type <event> event
+%type <function> function
+%type <block> block
+%type <declaration_list> dec_list
+%type <declaration> declaration
+%type <argument_list> arg_list
+%type <argument> arg
+%type <type> type
+%type <throw_list> throws
+%type <identifier_list> id_list
 
 %start input
 
@@ -32,12 +68,12 @@ input       :
             | input statement  { ((ast::Telegraph*)$1)->add($2); $$ = $1; std::cout << $$->toString() << std::endl; }
             ;
 
-statement   : version
-            | struct
-            | error_def
-            | enum
-            | event
-            | function
+statement   : version    { $$ =  $1; } // bison doesn't know anything about c++ subclasses
+            | struct     { $$ =  $1; } // by being explicit we can avoid a false positive
+            | error_def  { $$ =  $1; } // warning 'type clash on default action: <node> != <xx>'
+            | enum       { $$ =  $1; }
+            | event      { $$ =  $1; }
+            | function   { $$ =  $1; }
             ;
 
 version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version((ast::VersionNumber*)$2); }

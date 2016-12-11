@@ -69,7 +69,33 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
+union YYSTYPE
+{
+#line 13 "src/parser.y" /* yacc.c:1909  */
+
+  ast::Argument* argument;
+  ast::ArgumentList* argument_list;
+  ast::Array* array;
+  ast::Block* block;
+  ast::Declaration* declaration;
+  ast::DeclarationList* declaration_list;
+  ast::Enum* enumeration;
+  ast::Error* error;
+  ast::Event* event;
+  ast::Function* function;
+  ast::Identifier* identifier;
+  ast::IdentifierList* identifier_list;
+  ast::Node* node;
+  ast::Struct* structure;
+  ast::Telegraph* telegraph;
+  ast::ThrowList* throw_list;
+  ast::Type* type;
+  ast::Version* version;
+  ast::VersionNumber* version_number;
+
+#line 98 "src/parser.tab.h" /* yacc.c:1909  */
+};
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
