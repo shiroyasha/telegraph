@@ -43,8 +43,7 @@ void yyerror(const char *s) {
 %token <version_number> VERSION_NUMBER
 %token <identifier> IDENTIFIER
 
-%type <telegraph> input
-%type <node> statement
+%type <telegraph> start telegraph
 %type <version> version
 %type <structure> struct
 %type <enumeration> enum
@@ -60,21 +59,21 @@ void yyerror(const char *s) {
 %type <throw_list> throws
 %type <identifier_list> id_list
 
-%start input
+%start start
 
 %%
 
-input       :
-            /* empty line */   { $$ = new ast::Telegraph(); }
-            | input statement  { $1->add($2); $$ = $1; std::cout << $$->toString() << std::endl; }
+start       : telegraph { $$ = $1; std::cout << $$->toString() << std::endl; }
             ;
 
-statement   : version    { $$ =  $1; } // bison doesn't know anything about c++ subclasses
-            | struct     { $$ =  $1; } // by being explicit we can avoid a false positive
-            | error_def  { $$ =  $1; } // warning 'type clash on default action: <node> != <xx>'
-            | enum       { $$ =  $1; }
-            | event      { $$ =  $1; }
-            | function   { $$ =  $1; }
+telegraph   :
+            /* empty line */       { $$ = new ast::Telegraph(); }
+            | telegraph version    { $1->set_version($2);  $$ = $1; }
+            | telegraph struct     { $1->add_struct($2);   $$ = $1; }
+            | telegraph error_def  { $1->add_error($2);    $$ = $1; }
+            | telegraph enum       { $1->add_enum($2);     $$ = $1; }
+            | telegraph event      { $1->add_event($2);    $$ = $1; }
+            | telegraph function   { $1->add_function($2); $$ = $1; }
             ;
 
 version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($2); }
