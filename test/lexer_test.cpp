@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+#include "ast/ast.hpp"
 #include "lexer.yy.h"
 #include "parser.tab.h"
 
