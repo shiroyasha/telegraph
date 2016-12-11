@@ -6,8 +6,6 @@
 
 #include "ast/ast.hpp"
 
-#define YYSTYPE ast::Node*
-
 #include "parser.tab.h"
 %}
 
@@ -27,12 +25,12 @@ NUMBER [0-9][0-9]*
 "throws"    { return KW_THROWS; }
 
 {NUMBER}"."{NUMBER}"."{NUMBER} {
-  yylval = new ast::VersionNumber(yytext);
+  yylval.version_number = new ast::VersionNumber(yytext);
   return VERSION_NUMBER;
 }
 
 [a-zA-Z_][A-Za-z0-9_]* {
-  yylval = new ast::Identifier(yytext);
+  yylval.identifier = new ast::Identifier(yytext);
   return IDENTIFIER;
 }
 

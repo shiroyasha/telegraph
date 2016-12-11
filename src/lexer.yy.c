@@ -503,10 +503,8 @@ char *yytext;
 
 #include "ast/ast.hpp"
 
-#define YYSTYPE ast::Node*
-
 #include "parser.tab.h"
-#line 510 "src/lexer.yy.c"
+#line 508 "src/lexer.yy.c"
 
 #define INITIAL 0
 
@@ -693,10 +691,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 19 "src/lexer.l"
+#line 17 "src/lexer.l"
 
 
-#line 700 "src/lexer.yy.c"
+#line 698 "src/lexer.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -781,77 +779,77 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "src/lexer.l"
+#line 19 "src/lexer.l"
 { return KW_VERSION; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 22 "src/lexer.l"
+#line 20 "src/lexer.l"
 { return KW_STRUCT; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "src/lexer.l"
+#line 21 "src/lexer.l"
 { return KW_ENUM; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "src/lexer.l"
+#line 22 "src/lexer.l"
 { return KW_EVENT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "src/lexer.l"
+#line 23 "src/lexer.l"
 { return KW_PUBLISHES; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 26 "src/lexer.l"
+#line 24 "src/lexer.l"
 { return KW_ERROR; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 27 "src/lexer.l"
+#line 25 "src/lexer.l"
 { return KW_THROWS; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "src/lexer.l"
+#line 27 "src/lexer.l"
 {
-  yylval = new ast::VersionNumber(yytext);
+  yylval.version_number = new ast::VersionNumber(yytext);
   return VERSION_NUMBER;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 34 "src/lexer.l"
+#line 32 "src/lexer.l"
 {
-  yylval = new ast::Identifier(yytext);
+  yylval.identifier = new ast::Identifier(yytext);
   return IDENTIFIER;
 }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 39 "src/lexer.l"
+#line 37 "src/lexer.l"
 ;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 40 "src/lexer.l"
+#line 38 "src/lexer.l"
 ;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 42 "src/lexer.l"
+#line 40 "src/lexer.l"
 { return yytext[0]; };
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 44 "src/lexer.l"
+#line 42 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 855 "src/lexer.yy.c"
+#line 853 "src/lexer.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1849,7 +1847,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 44 "src/lexer.l"
+#line 42 "src/lexer.l"
 
 
 
