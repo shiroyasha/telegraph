@@ -18,7 +18,7 @@ namespace ast {
     }
 
     std::string toString() {
-      return "{ " + m_id_list->toString() + " }";
+      return "enum " + m_name->toString() + "{ " + m_id_list->toString() + " }";
     }
   };
 }
