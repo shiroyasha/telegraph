@@ -4,14 +4,14 @@
 #include "ast/node.hpp"
 
 namespace ast {
-  class Event : public Node {
+  class Identifier : public Node {
     std::string m_name;
   public:
     Identifier(const char* name) : m_name(name) {}
 
     ~Identifier() {}
 
-    void toString() {
+    std::string toString() {
       return m_name;
     }
   };

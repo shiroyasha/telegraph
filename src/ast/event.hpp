@@ -23,7 +23,7 @@ namespace ast {
       delete m_name;
     }
 
-    void toString() {
+    std::string toString() {
       if(m_type) {
         return "event " + m_name->toString() + " publishes " + m_type->toString();
       } else {

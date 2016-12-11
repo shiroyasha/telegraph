@@ -10,11 +10,11 @@ namespace ast {
   public:
     Type(Identifier* name) : m_name(name) {}
 
-    ~Struct() {
+    ~Type() {
       delete m_name;
     }
 
-    void toString() {
+    std::string toString() {
       return m_name->toString();
     }
   };

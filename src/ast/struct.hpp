@@ -17,7 +17,7 @@ namespace ast {
       delete m_block;
     }
 
-    void toString() {
+    std::string toString() {
       return "struct " + m_name->toString() + " " + m_block->toString();
     }
   };

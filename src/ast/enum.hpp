@@ -5,16 +5,19 @@
 
 namespace ast {
   class Enum : public Node {
+  private:
+    Identifier* m_name;
     IdentifierList* m_id_list;
 
   public:
-    Enum(IdentifierLIst* list) : m_id_list(list) {}
+    Enum(Identifier* name, IdentifierList* list) : m_name(name), m_id_list(list) {}
 
     ~Enum() {
+      delete m_name;
       delete m_id_list;
     }
 
-    void toString() {
+    std::string toString() {
       return "{ " + m_id_list->toString() + " }";
     }
   };

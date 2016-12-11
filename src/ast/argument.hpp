@@ -6,6 +6,7 @@
 
 namespace ast {
   class Argument : public Node {
+  private:
     Identifier* m_name;
     Type* m_type;
 
@@ -17,7 +18,7 @@ namespace ast {
       delete m_type;
     }
 
-    void toString() {
+    std::string toString() {
       return m_type->toString() + " " + m_name->toString();
     }
   };

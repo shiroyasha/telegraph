@@ -17,7 +17,7 @@ namespace ast {
       delete m_type;
     }
 
-    void toString() {
+    std::string toString() {
       return m_type->toString() + " " + m_name->toString();
     }
   };

@@ -5,30 +5,21 @@
 
 namespace ast {
   class ThrowList : public Node {
-    std::vector<Identifier*> m_ids;
+  private:
+    IdentifierList* m_id_list;
 
   public:
     ThrowList() {}
-    ThrowList(Identifier* id) {
-      m_ids.push_back(id);
-    }
+    ThrowList(IdentifierList* list) : m_id_list(list) { }
 
     ~ThrowList() {
-      for(auto id : m_ids) {
-        delete id;
-      }
+      if(m_id_list) delete m_id_list;
     }
 
-    void toString() {
-      if(m_ids.empty()) return "";
+    std::string toString() {
+      if(m_id_list) return m_id_list->toString();
 
-      std::string result;
-
-      for(auto id : m_ids) {
-        result += id->toString() + ", ";
-      }
-
-      return result.substr(0, result.size() - 1);
+      return "";
     }
   };
 }

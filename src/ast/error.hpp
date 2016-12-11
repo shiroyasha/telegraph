@@ -12,12 +12,12 @@ namespace ast {
   public:
     Error(Identifier* name, Block* block) : m_name(name), m_block(block) {}
 
-    ~Enum() {
+    ~Error() {
       delete m_name;
       delete m_block;
     }
 
-    void toString() {
+    std::string toString() {
       return "error " + m_name->toString() + " " + m_block->toString();
     }
   };

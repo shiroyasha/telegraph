@@ -29,7 +29,7 @@ void yyerror(const char *s) {
 
 input       :
             /* empty line */ { $$ = new ast::Telegraph(); }
-            | input statement  { $$ = $1->add($2); std::cout << $$->toString() << std::endl; }
+            | input statement  { ((ast::Telegraph*)$1)->add($2); $$ = $1; std::cout << $$->toString() << std::endl; }
             ;
 
 statement   : version
@@ -40,55 +40,60 @@ statement   : version
             | function
             ;
 
-version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version($1); }
+version     : KW_VERSION VERSION_NUMBER { $$ = new ast::Version((ast::VersionNumber*)$1); }
             ;
 
-struct      : KW_STRUCT IDENTIFIER block { $$ = new ast::Struct($2, $3); }
+struct      : KW_STRUCT IDENTIFIER block { $$ = new ast::Struct((ast::Identifier*)$2, (ast::Block*)$3); }
             ;
 
-enum        : KW_ENUM IDENTIFIER '{' id_list '}' { $$ = new ast::Enum($2, $4); }
+enum        : KW_ENUM IDENTIFIER '{' id_list '}' { $$ = new ast::Enum((ast::Identifier*)$2, (ast::IdentifierList*)$4); }
             ;
 
-error_def   : KW_ERROR IDENTIFIER block { $$ = new ast::Error($2, $3); }
+error_def   : KW_ERROR IDENTIFIER block { $$ = new ast::Error((ast::Identifier*)$2, (ast::Block*)$3); }
 
-event       : KW_EVENT IDENTIFIER KW_PUBLISHES type ';'  { $$ = new ast::Event($2, $4); }
-            | KW_EVENT IDENTIFIER KW_PUBLISHES block ';' { $$ = new ast::Event($2, $4); }
+event       : KW_EVENT IDENTIFIER KW_PUBLISHES type ';'  { $$ = new ast::Event((ast::Identifier*)$2, (ast::Type*)$4); }
+            | KW_EVENT IDENTIFIER KW_PUBLISHES block ';' { $$ = new ast::Event((ast::Identifier*)$2, (ast::Block*)$4); }
 
-function    : type IDENTIFIER '(' arg_list ')' throws ';' { $$ = new ast::Function($2, $1, $4, $6); }
+function    : type IDENTIFIER '(' arg_list ')' throws ';' {
+                $$ = new ast::Function((ast::Identifier*)$2,
+                                       (ast::Type*)$1,
+                                       (ast::ArgumentList*)$4,
+                                       (ast::ThrowList*)$6);
+              }
             ;
 
-block       : '{' dec_list '}' { $$ = new ast::Block($2); }
+block       : '{' dec_list '}' { $$ = new ast::Block((ast::DeclarationList*)$2); }
             ;
 
 dec_list    :
             /* nothing */           { $$ = new ast::DeclarationList(); }
-            | dec_list declaration  { $$ = $1->add($2); }
+            | dec_list declaration  { ((ast::DeclarationList*)$1)->add((ast::Declaration*)$2); $$ = $1; }
             ;
 
-declaration : type IDENTIFIER ';' { $$ = new ast::Declaration($1, $2); }
+declaration : type IDENTIFIER ';' { $$ = new ast::Declaration((ast::Identifier*)$2, (ast::Type*)$1); }
             ;
 
 arg_list    :
             /* nothing */       { $$ = new ast::ArgumentList(); }
-            | arg               { $$ = new ast::ArgumentList($1); }
-            | arg_list ',' arg  { $$ = $1->add($3); }
+            | arg               { $$ = new ast::ArgumentList((ast::Argument*)$1); }
+            | arg_list ',' arg  { ((ast::ArgumentList*)$1)->add((ast::Argument*)$3); $$ = $1; }
             ;
 
-arg         : type IDENTIFIER { $$ = new ast::Argument($2, $1); }
+arg         : type IDENTIFIER { $$ = new ast::Argument((ast::Identifier*)$2, (ast::Type*)$1); }
             ;
 
 
-type        : IDENTIFIER          { $$ = new ast::Type($1); }
-            | '[' IDENTIFIER ']'  { $$ = new ast::Array($2); }
+type        : IDENTIFIER          { $$ = new ast::Type((ast::Identifier*)$1); }
+            | '[' IDENTIFIER ']'  { $$ = new ast::Array((ast::Identifier*)$2); }
             ;
 
 throws      :
             /* nothing */         { $$ = new ast::ThrowList(); }
-            | KW_THROWS id_list   { $$ = new ast::ThrowList($2); }
+            | KW_THROWS id_list   { $$ = new ast::ThrowList((ast::IdentifierList*)$2); }
             ;
 
-id_list     : IDENTIFIER             { $$ = new ast::IdentifierList($1); }
-            | id_list ',' IDENTIFIER { $$ = $1->add($3); }
+id_list     : IDENTIFIER             { $$ = new ast::IdentifierList((ast::Identifier*)$1); }
+            | id_list ',' IDENTIFIER { ((ast::IdentifierList*)$1)->add((ast::Identifier*)$3); $$ = $1; }
             ;
 
 %%

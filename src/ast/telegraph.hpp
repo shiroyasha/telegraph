@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "ast/node.hpp"
 #include "ast/identifier.hpp"
 #include "ast/block.hpp"
@@ -21,7 +22,7 @@ namespace ast {
       m_nodes.push_back(node);
     }
 
-    void toString() {
+    std::string toString() {
       std::string result;
 
       for(auto node : m_nodes) {

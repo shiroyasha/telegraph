@@ -7,7 +7,7 @@
 #include "ast/type.hpp"
 
 namespace ast {
-  class Event : public Node {
+  class Function : public Node {
     Identifier* m_name;
 
     Type* m_return_type;
@@ -16,18 +16,18 @@ namespace ast {
 
   public:
     Function(Identifier* name, Type* type, ArgumentList* args, ThrowList* throws) :
-      m_name(name), m_return_type(type), m_arguments(args), m_throws(throws);
+      m_name(name), m_return_type(type), m_arguments(args), m_throws(throws) {};
 
-    ~Event() {
+    ~Function() {
       delete m_name;
       delete m_return_type;
       delete m_arguments;
       delete m_throws;
     }
 
-    void toString() {
+    std::string toString() {
       return m_return_type->toString() + " " + m_name->toString()
-        + "(" + m_arguments.toString() + ") throws" + m_throw_list.toString() + ";";
+        + "(" + m_arguments->toString() + ") throws" + m_throws->toString() + ";";
     }
   };
 }

@@ -4,8 +4,11 @@
 
 /* #include "token_types.hpp" */
 
-#include "parser.tab.h"
 #include "ast/ast.hpp"
+
+#define YYSTYPE ast::Node*
+
+#include "parser.tab.h"
 %}
 
 %option header-file="src/lexer.yy.h"
@@ -24,12 +27,12 @@ NUMBER [0-9][0-9]*
 "throws"    { return KW_THROWS; }
 
 {NUMBER}"."{NUMBER}"."{NUMBER} {
-  yylval.value = new ast::VersionNumber(yytext);
+  yylval = new ast::VersionNumber(yytext);
   return VERSION_NUMBER;
 }
 
 [a-zA-Z_][A-Za-z0-9_]* {
-  yylval.value = new ast::Identifier(yytext);
+  yylval = new ast::Identifier(yytext);
   return IDENTIFIER;
 }
 

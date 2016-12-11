@@ -14,7 +14,7 @@ namespace ast {
       delete m_declaration_list;
     }
 
-    void toString() {
+    std::string toString() {
       return "{\n" + m_declaration_list->toString() + "}";
     }
   };

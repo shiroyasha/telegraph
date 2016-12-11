@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "ast/node.hpp"
 #include "ast/declaration.hpp"
 
@@ -16,7 +17,13 @@ namespace ast {
       }
     }
 
-    void toString() {
+    void add(Declaration* d) {
+      m_declarations.push_back(d);
+    }
+
+    std::string toString() {
+      std::string result;
+
       for(auto dec : m_declarations) {
         result += dec->toString() + ";\n";
       }

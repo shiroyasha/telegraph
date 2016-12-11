@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "ast/node.hpp"
 #include "ast/argument.hpp"
 
@@ -8,18 +9,22 @@ namespace ast {
     std::vector<Argument*> m_arguments;
 
   public:
-    Argument() {}
-    Argument(Argument* argument) {
+    ArgumentList() {}
+    ArgumentList(Argument* argument) {
       m_arguments.push_back(argument);
     }
 
-    ~Argument() {
+    ~ArgumentList() {
       for(Argument* arg : m_arguments) {
         delete arg;
       }
     }
 
-    void toString() {
+    void add(Argument* arg) {
+      m_arguments.push_back(arg);
+    }
+
+    std::string toString() {
       if(m_arguments.empty()) return "";
 
       std::string result;

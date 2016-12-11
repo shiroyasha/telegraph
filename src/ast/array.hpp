@@ -7,9 +7,9 @@
 namespace ast {
   class Array : public Type {
   public:
-    Argument(Identifier* name) : Type(name) {}
+    Array(Identifier* name) : Type(name) {}
 
-    void toString() {
+    std::string toString() {
       return "[" + Type::toString() + "]";
     }
   };

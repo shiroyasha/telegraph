@@ -11,7 +11,7 @@ namespace ast {
 
     ~VersionNumber() {}
 
-    void toString() {
+    std::string toString() {
       return m_number;
     }
   };
