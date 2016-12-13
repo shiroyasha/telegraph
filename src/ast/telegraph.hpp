@@ -41,6 +41,10 @@ namespace ast {
     void add_event(Event* e)       { m_events.push_back(e); }
     void add_error(Error* e)       { m_errors.push_back(e); }
 
+    std::string version() {
+      return m_version->number();
+    }
+
     std::string toString() {
       std::string result;
 

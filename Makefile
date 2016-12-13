@@ -6,8 +6,9 @@ TEST_LIBS = -lpthread -lgtest
 
 all: bin/telegraph
 
-test: bin/tests/lexer_test
-	./bin/tests/lexer_test
+test: bin/lexer_test bin/parser_test
+	./bin/lexer_test
+	./bin/parser_test
 
 bin:
 	mkdir -p bin
@@ -32,8 +33,14 @@ bin/parser.o: bin src/parser.y
 bin/telegraph.o: bin src/telegraph.cpp
 	$(CC) $(CFLAGS) src/telegraph.cpp -o bin/telegraph.o
 
+
+# test objects
+
 bin/lexer_test.o: bin/tests test/lexer_test.cpp
 	$(CC) $(CFLAGS) test/lexer_test.cpp -o bin/lexer_test.o
+
+bin/parser_test.o: bin/tests test/parser_test.cpp
+	$(CC) $(CFLAGS) test/parser_test.cpp -o bin/parser_test.o
 
 
 # binaries
@@ -41,5 +48,11 @@ bin/lexer_test.o: bin/tests test/lexer_test.cpp
 bin/telegraph: bin/ast.o bin/lexer.o bin/parser.o bin/telegraph.o
 	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/telegraph.o -o bin/telegraph
 
-bin/tests/lexer_test: bin/tests bin/ast.o bin/lexer.o bin/parser.o bin/lexer_test.o
+
+# test
+
+bin/lexer_test: bin/tests bin/ast.o bin/lexer.o bin/parser.o bin/lexer_test.o
 	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/lexer_test.o $(TEST_LIBS) -o bin/lexer_test
+
+bin/parser_test: bin/tests bin/ast.o bin/lexer.o bin/parser.o bin/parser_test.o
+	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/parser_test.o $(TEST_LIBS) -o bin/parser_test

@@ -14,6 +14,10 @@ namespace ast {
       delete m_number;
     }
 
+    std::string number() {
+      return m_number->toString();
+    }
+
     std::string toString() {
       return "version " + m_number->toString();
     }
