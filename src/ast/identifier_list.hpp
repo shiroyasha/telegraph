@@ -21,6 +21,16 @@ namespace ast {
       }
     }
 
+    std::vector<std::string> values() {
+      std::vector<std::string> result;
+
+      for(auto id : m_ids) {
+        result.push_back(id->toString());
+      }
+
+      return result;
+    }
+
     void add(Identifier* id) {
       m_ids.push_back(id);
     }

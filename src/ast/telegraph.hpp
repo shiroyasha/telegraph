@@ -12,7 +12,7 @@
 
 namespace ast {
   class Telegraph : public Node {
-    Version* m_version;
+    Version* m_version = NULL;
 
     std::vector<Struct*>   m_structures;
     std::vector<Function*> m_functions;
@@ -45,10 +45,16 @@ namespace ast {
       return m_version->number();
     }
 
+    std::vector<Enum*> const &enums() const {
+      return m_enums;
+    }
+
     std::string toString() {
       std::string result;
 
-      result += m_version->toString() + "\n\n";
+      if(m_version) {
+        result += m_version->toString() + "\n\n";
+      }
 
       for(auto n : m_enums)      { result += n->toString() + "\n"; }
       result += "\n";
