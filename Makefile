@@ -1,58 +1,32 @@
-.PHONY: all test
+.PHONY: all clean
 
 CC = g++
-CFLAGS = --std=c++11 -I src -I src/ast -c
-TEST_LIBS = -lpthread -lgtest
+CPPFLAGS = --std=c++11 -I src
 
-all: bin/telegraph
+SOURCES := $(shell find src -type f -name *.cpp)
+OBJECTS := $(patsubst src/%,build/%, $(subst .cpp,.o, $(SOURCES))) build/parser.o build/lexer.o
 
-test: bin/lexer_test bin/parser_test
-	./bin/lexer_test
-	./bin/parser_test
+TARGET = bin/telegraph
 
-bin:
-	mkdir -p bin
+all: $(TARGET)
 
-bin/tests: bin
-	mkdir -p bin/tests
+$(TARGET): $(OBJECTS)
+	@mkdir -p bin
+	$(CC) $(OBJECTS) -o bin/telegraph
 
+build/lexer.o: build/parser.o
 
-# objects
-
-bin/ast.o: bin $(wildcard src/ast/*)
-	$(CC) $(CFLAGS) src/ast/ast.cpp -o bin/ast.o
-
-bin/lexer.o: bin bin/parser.o src/lexer.l
-	flex -o src/lexer.yy.c src/lexer.l
-	$(CC) $(CFLAGS) src/lexer.yy.c -o bin/lexer.o
-
-bin/parser.o: bin src/parser.y
-	yacc --debug -o src/parser.tab.c -d src/parser.y
-	$(CC) $(CFLAGS) src/parser.tab.c -o bin/parser.o
-
-bin/telegraph.o: bin src/telegraph.cpp
-	$(CC) $(CFLAGS) src/telegraph.cpp -o bin/telegraph.o
+build/%.o: src/%.cpp
+	@mkdir -p $(dir $@)
+	$(CC) $(CPPFLAGS) -c $< -o $@
 
 
-# test objects
+src/%.cpp: src/%.l
+	flex -o $@ $<
 
-bin/lexer_test.o: bin/tests test/lexer_test.cpp
-	$(CC) $(CFLAGS) test/lexer_test.cpp -o bin/lexer_test.o
+src/%.cpp: src/%.y
+	bison --debug -o $@ -d $<
 
-bin/parser_test.o: bin/tests test/parser_test.cpp
-	$(CC) $(CFLAGS) test/parser_test.cpp -o bin/parser_test.o
-
-
-# binaries
-
-bin/telegraph: bin/ast.o bin/lexer.o bin/parser.o bin/telegraph.o
-	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/telegraph.o -o bin/telegraph
-
-
-# test
-
-bin/lexer_test: bin/tests bin/ast.o bin/lexer.o bin/parser.o bin/lexer_test.o
-	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/lexer_test.o $(TEST_LIBS) -o bin/lexer_test
-
-bin/parser_test: bin/tests bin/ast.o bin/lexer.o bin/parser.o bin/parser_test.o
-	$(CC) bin/ast.o bin/lexer.o bin/parser.o bin/parser_test.o $(TEST_LIBS) -o bin/parser_test
+clean:
+	rm -rf bin
+	rm -rf build

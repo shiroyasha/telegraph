@@ -1,7 +1,9 @@
 %{
 #include <iostream>
-#include "lexer.yy.h"
+/* #include "lexer.hpp" */
 #include "ast/ast.hpp"
+
+extern int yylex();
 
 void yyerror(ast::Telegraph* r, const char* s) {
   std::cout << "EEK, parse error!  Message: " << s << std::endl;

@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_SRC_PARSER_TAB_H_INCLUDED
-# define YY_YY_SRC_PARSER_TAB_H_INCLUDED
+#ifndef YY_YY_SRC_PARSER_HPP_INCLUDED
+# define YY_YY_SRC_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -56,23 +56,13 @@ extern int yydebug;
     IDENTIFIER = 266
   };
 #endif
-/* Tokens.  */
-#define KW_VERSION 258
-#define KW_STRUCT 259
-#define KW_ENUM 260
-#define KW_EVENT 261
-#define KW_PUBLISHES 262
-#define KW_ERROR 263
-#define KW_THROWS 264
-#define VERSION_NUMBER 265
-#define IDENTIFIER 266
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 15 "src/parser.y" /* yacc.c:1909  */
+#line 17 "src/parser.y" /* yacc.c:1909  */
 
   ast::Argument* argument;
   ast::ArgumentList* argument_list;
@@ -93,7 +83,7 @@ union YYSTYPE
   ast::Version* version;
   ast::VersionNumber* version_number;
 
-#line 97 "src/parser.tab.h" /* yacc.c:1909  */
+#line 87 "src/parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -104,4 +94,4 @@ extern YYSTYPE yylval;
 
 int yyparse (ast::Telegraph* result);
 
-#endif /* !YY_YY_SRC_PARSER_TAB_H_INCLUDED  */
+#endif /* !YY_YY_SRC_PARSER_HPP_INCLUDED  */

@@ -1,15 +1,11 @@
 %{
-
 #include <iostream>
 
-/* #include "token_types.hpp" */
-
 #include "ast/ast.hpp"
-
-#include "parser.tab.h"
+#include "parser.hpp"
 %}
 
-%option header-file="src/lexer.yy.h"
+%option header-file="lexer.hpp"
 %option noyywrap
 
 NUMBER [0-9][0-9]*

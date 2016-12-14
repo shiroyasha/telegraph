@@ -1,10 +1,13 @@
 #include <iostream>
+#include <cstring>
 
 #include "ast/ast.hpp"
-#include "lexer.yy.h"
-#include "parser.tab.h"
 
 extern int yydebug;
+extern int yylex();
+extern FILE* yyin;
+extern char* yytext;
+extern int yyparse(ast::Telegraph*);
 
 enum MODE { PARSE, TOKENIZE, DEBUG };
 
